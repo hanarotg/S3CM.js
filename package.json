@@ -1,0 +1,22 @@
+{
+  "name": "s3cm",
+  "version": "1.0.0",
+  "description": "![logo](/public/logo.png)\r **WE DO NOT RECOMMEND THIS LIBRARY IN PRODOCTION YET**\r S3 Client Manager - client-side aws S3 manager",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanarotg/S3CM.js.git"
+  },
+  "author": "hanarotg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanarotg/S3CM.js/issues"
+  },
+  "homepage": "https://github.com/hanarotg/S3CM.js#readme",
+  "peerDependencies": {
+    "@aws-sdk/client-s3": "^3.47.0"
+  }
+}
