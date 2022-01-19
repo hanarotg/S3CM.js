@@ -11,35 +11,36 @@ export default class S3CM {
 
   // S3CM.upload
   async upload(files, bucket, key, arr) {
+    await Object.values(files).reduce(async (accPromise, file) => {
+      await accPromise;
+      // s3-sdk
+      const response = await this.client.send(
+        new PutObjectCommand({
+          Bucket: bucket,
+          Key: `${key}/${file.name}`,
+          Body: file,
+          ContentType: file.type,
+        })
+      );
+      arr.push(`${key}/${file.name}`);
+    }, Promise.resolve());
+
     return new Promise((resolve, reject) => {
-      await Object.values(files).reduce(async (accPromise, file) => {
-        await accPromise;
-        // s3-sdk
-        const response = await client.send(
-          new PutObjectCommand({
-            Bucket: bucket,
-            Key: `${key}/${file.name}`,
-            Body: file,
-            ContentType: file.type,
-          })
-        );
-        arr.push(`${key}/${file.name}`);
-      }, Promise.resolve());
       resolve(arr);
     });
   }
 
   // S3CM.delete
   async delete(fileIndex, bucket, key, arr) {
+    // s3-sdk
+    await this.client.send(
+      new DeleteObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      })
+    );
+    arr.splice(fileIndex, 1);
     return new Promise((resolve, reject) => {
-      // s3-sdk
-      await client.send(
-        new DeleteObjectCommand({
-          Bucket: bucket,
-          Key: key,
-        })
-      );
-      arr.splice(fileIndex, 1);
       resolve(arr);
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "s3cm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "![logo](/public/logo.png)\r **WE DO NOT RECOMMEND THIS LIBRARY IN PRODOCTION YET**\r S3 Client Manager - client-side aws S3 manager",
   "main": "dist/index.js",
   "scripts": {
