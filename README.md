@@ -2,9 +2,8 @@
 
 # [S3CM.js]()
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
 S3 Client Manager - client-side AWS S3 javascript library
+
 **DO NOT RECOMMEND TO USE IN PRODOCTION YET**
 
 </center>
@@ -89,9 +88,12 @@ S3 Client Manager - client-side AWS S3 javascript library
   });
   ```
 - _param_
+
   `config` : See [S3ClientConfig](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/interfaces/s3clientconfig.html)
+
 - _return_
-  _s3cm_
+
+  `s3cm`
 
 #### s3cm.upload(files, bucket, key, arr)
 
@@ -111,11 +113,17 @@ S3 Client Manager - client-side AWS S3 javascript library
   ```
 
 - _param_
+
   `files` : Array of [file object](https://developer.mozilla.org/en-US/docs/Web/API/File)
+
   `bucket` : S3 bucket name
+
   `key` : S3 key
+
   `arr` : String Array to be updated
+
 - _return_
+
   String Array that updated after uploading files
 
 #### s3cm.delete(fileidx, bucket, key, arr)
@@ -136,9 +144,11 @@ S3 Client Manager - client-side AWS S3 javascript library
   ```
 
 - _param_
+
   `fileidx` : index of filename to be deleted
 
 - _return_
+
   String Array that updated after uploading files
 
 ## License
