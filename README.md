@@ -1,8 +1,11 @@
-![logo](/public/logo.png)
-**WE DO NOT RECOMMEND THIS LIBRARY IN PRODOCTION YET**
-S3 Client Manager - client-side aws S3 manager
+<center>
 
----
+# [S3CM.js]()
+
+S3 Client Manager - client-side AWS S3 javascript library
+**DO NOT RECOMMEND TO USE IN PRODOCTION YET**
+
+## </center>
 
 ### Features
 
