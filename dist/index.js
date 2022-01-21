@@ -5,18 +5,19 @@ import {
 } from '@aws-sdk/client-s3';
 
 export default class S3CM {
-  constructor(options) {
-    this.client = new S3Client(options);
+  constructor(config, option) {
+    this.client = new S3Client(config);
+    this.bucket = option.bucket;
   }
 
   // S3CM.upload
-  async upload(files, bucket, key, arr) {
+  async upload(files, key, arr) {
     await Object.values(files).reduce(async (accPromise, file) => {
       await accPromise;
       // s3-sdk
-      const response = await this.client.send(
+      await this.client.send(
         new PutObjectCommand({
-          Bucket: bucket,
+          Bucket: this.bucket,
           Key: `${key}/${file.name}`,
           Body: file,
           ContentType: file.type,
@@ -31,11 +32,11 @@ export default class S3CM {
   }
 
   // S3CM.delete
-  async delete(fileIndex, bucket, key, arr) {
+  async delete(fileIndex, key, arr) {
     // s3-sdk
     await this.client.send(
       new DeleteObjectCommand({
-        Bucket: bucket,
+        Bucket: this.bucket,
         Key: key,
       })
     );
