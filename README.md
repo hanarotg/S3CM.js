@@ -7,7 +7,7 @@ S3 Client Manager - client-side AWS S3 javascript library
 ## Features
 
 - client-side oriented JS library
-- Promise
+- Promise-base functions
 - Order-Keeping Multiple file-upload
 - [AWS-SDK-V3](https://github.com/aws/aws-sdk-js-v3) Based
 
@@ -61,21 +61,23 @@ S3 Client Manager - client-side AWS S3 javascript library
     const [stateText, setStateText] = useState('nothing');
 
     // full information of configuration, see  https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/interfaces/s3clientconfig.html
-    const config = {
+    const S3config = {
       region: 'ap-northeast-2',
       credentials: {
         accessKeyId: 'my-access-key',
         secretAccessKey: 'my-secret-key',
       },
     };
-    const option = {
+    const CMconfig = {
       bucket: 'my-bucket-name',
+      key: 'my-location-directory(key)',
+      array : {arr && arr}
     };
-    const s3cm = new S3CM(config, option);
+    const s3cm = new S3CM(S3config, CMconfig);
 
     const uploadTest = async (files) => {
       setStateText('uploading..');
-      const response = await s3cm.upload(files, 'user/profile', arr);
+      const response = await s3cm.upload(files);
       setArr(response);
       setStateText('uploaded');
     };
@@ -102,7 +104,7 @@ S3 Client Manager - client-side AWS S3 javascript library
 
 ## API
 
-#### s3cm(config, option)
+#### s3cm(S3config, CMconfig)
 
 - _example_
   ```javascript
@@ -115,19 +117,24 @@ S3 Client Manager - client-side AWS S3 javascript library
       },
     },
     {
-      bucket: 'applePie-main-1',
+      bucket: 'coffee-main-1',
+      key: 'board/398042/gallery',
+      arr: ['apple.jpeg', 'banana404.png'],
     }
   );
   ```
 - _param_
 
-  `config` : [S3ClientConfig](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/interfaces/s3clientconfig.html)
+  `S3config` : [S3ClientConfig](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/interfaces/s3clientconfig.html)
 
-  `option` :
+  `CMconfig` :
 
   ```javascript
-  const option = {
+  const CMconfig = {
     bucket: 'your-bucket-name',
+    key: 'your-key',
+    array: arrFromYourDB,
+    isDuplicatedFileNameAutoChange: true, // [option] default : true, if false throw error when upload duplcated name of file
   };
   ```
 
@@ -135,16 +142,14 @@ S3 Client Manager - client-side AWS S3 javascript library
 
   `s3cm`
 
-#### s3cm.upload(files, key, arr)
+#### s3cm.upload(files)
 
 - _example_
 
   ```javascript
   // if upload 2 files each names '010.jpeg', 'jot.png'
-  const arrUpdated = await s3cm.upload(files, 'user/steve/profile', [
-    'abc.png',
-    'yeeeeeeeee.svg',
-  ]);
+  // when array = ['abc.png', 'yeeeeeeeee.svg']
+  const arrUpdated = await s3cm.upload(files);
 
   console.log(arrUpdated);
   // ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
@@ -154,26 +159,18 @@ S3 Client Manager - client-side AWS S3 javascript library
 
   `files` : Array of [file object](https://developer.mozilla.org/en-US/docs/Web/API/File)
 
-  `key` : S3 key
-
-  `arr` : String Array to be updated
-
 - _return_
 
-  String Array that updated after uploading files
+  updated `arr` after uploading files
 
-#### s3cm.delete(fileidx, key, arr)
+#### s3cm.deleteByIndex(fileIndex)
 
 - _example_
 
   ```javascript
   // if delete 'yeeeeeeeee.svg'
-  const arrUpdated = await s3cm.delete(1, 'user/steve/profile', [
-    'abc.png',
-    'yeeeeeeeee.svg',
-    '010.jpeg',
-    'jot.png',
-  ]);
+  // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
+  const arrUpdated = await s3cm.deleteByIndex(1);
 
   console.log(arrUpdated);
   // ['abc.png', '010.jpeg', 'jot.png']
@@ -181,11 +178,32 @@ S3 Client Manager - client-side AWS S3 javascript library
 
 - _param_
 
-  `fileidx` : index of filename to be deleted
+  `fileIndex` : number index of filename to be deleted
 
 - _return_
 
-  String Array that updated after uploading files
+  updated `arr` after uploading files
+
+#### s3cm.deleteByKey(fileKey)
+
+- _example_
+
+  ```javascript
+  // if delete 'yeeeeeeeee.svg'
+  // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
+  const arrUpdated = await s3cm.deleteKey('yeeeeeeeee.svg');
+
+  console.log(arrUpdated);
+  // ['abc.png', '010.jpeg', 'jot.png']
+  ```
+
+- _param_
+
+  `fileKey` : string key of file to be deleted
+
+- _return_
+
+  updated `arr` after uploading files
 
 ## License
 
