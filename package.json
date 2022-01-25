@@ -1,7 +1,7 @@
 {
   "name": "s3cm",
-  "version": "1.0.2",
-  "description": "![logo](/public/logo.png)\r **WE DO NOT RECOMMEND THIS LIBRARY IN PRODOCTION YET**\r S3 Client Manager - client-side aws S3 manager",
+  "version": "1.0.3",
+  "description": "S3 Client Manager - client-side aws S3 manager",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
