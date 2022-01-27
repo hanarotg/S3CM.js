@@ -1,6 +1,6 @@
 {
   "name": "s3cm",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "S3 Client Manager - client-side aws S3 manager",
   "main": "dist/index.js",
   "scripts": {

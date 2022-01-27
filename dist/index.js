@@ -10,7 +10,7 @@ export default class S3CM {
     this.client = new S3Client(S3config);
     this.bucket = CMconfig.bucket;
     this.key = CMconfig.key;
-    this.array = CMconfig.array;
+    this.array = CMconfig.array ? CMconfig.array : [];
     this.isDuplicatedFileNameAutoChange =
       CMconfig.isDuplicatedFileNameAutoChange
         ? CMconfig.isDuplicatedFileNameAutoChange

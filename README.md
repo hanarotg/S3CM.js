@@ -133,7 +133,7 @@ S3 Client Manager - client-side AWS S3 javascript library
   const CMconfig = {
     bucket: 'your-bucket-name',
     key: 'your-key',
-    array: arrFromYourDB,
+    array: arrFromYourDB, // [option] if not defined, return empty string array
     isDuplicatedFileNameAutoChange: true, // [option] default : true, if false throw error when upload duplcated name of file
   };
   ```
@@ -182,7 +182,7 @@ S3 Client Manager - client-side AWS S3 javascript library
 
 - _return_
 
-  updated `arr` after uploading files
+  updated `array` after uploading files
 
 #### s3cm.deleteByKey(fileKey)
 
@@ -191,7 +191,7 @@ S3 Client Manager - client-side AWS S3 javascript library
   ```javascript
   // if delete 'yeeeeeeeee.svg'
   // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
-  const arrUpdated = await s3cm.deleteKey('yeeeeeeeee.svg');
+  const arrUpdated = await s3cm.deleteByKey('yeeeeeeeee.svg');
 
   console.log(arrUpdated);
   // ['abc.png', '010.jpeg', 'jot.png']
@@ -203,7 +203,7 @@ S3 Client Manager - client-side AWS S3 javascript library
 
 - _return_
 
-  updated `arr` after uploading files
+  updated `array` after uploading files
 
 ## License
 
