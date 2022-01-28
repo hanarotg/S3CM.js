@@ -3,18 +3,16 @@ import {
   PutObjectCommand,
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
-import { v1 as uuidv1 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class S3CM {
   constructor(S3config, CMconfig) {
     this.client = new S3Client(S3config);
     this.bucket = CMconfig.bucket;
     this.key = CMconfig.key;
-    this.array = CMconfig.array ? CMconfig.array : [];
+    this.array = CMconfig.array ?? [];
     this.isDuplicatedFileNameAutoChange =
-      CMconfig.isDuplicatedFileNameAutoChange
-        ? CMconfig.isDuplicatedFileNameAutoChange
-        : true;
+      CMconfig.isDuplicatedFileNameAutoChange ?? true;
   }
 
   // S3CM.upload
@@ -27,7 +25,7 @@ export default class S3CM {
       if (indexOfName !== -1) {
         // In case of isDuplicatedFileNameAutoChange set false, return warning
         if (this.isDuplicatedFileNameAutoChange === false) {
-          console.error(
+          throw new Error(
             '[S3CM.js] S3 warning will occur. if you not want to get warning, and hope duplicated name to be auto-changed, set isDuplicatedFileNameAutoChange true'
           );
         }
@@ -38,7 +36,7 @@ export default class S3CM {
           fileName.lastIndexOf('.'),
           fileName.length
         );
-        uploadKey = `${this.key}/${uuidv1()}${flieExtension}`;
+        uploadKey = `${this.key}/${uuidv4()}${flieExtension}`;
       }
 
       await accPromise;
@@ -61,6 +59,13 @@ export default class S3CM {
 
   // S3CM.deleteByIndex
   async deleteByIndex(index) {
+    // If OutOfRange
+    if (index < 0 || index >= this.array.length) {
+      throw new Error(
+        '[S3CM.js] : deleteByIndex, index parameter is OutOfRange of Array'
+      );
+    }
+
     // s3-sdk
     await this.client.send(
       new DeleteObjectCommand({
@@ -79,7 +84,7 @@ export default class S3CM {
     let indexOfKey = this.array.indexOf(key);
     // Error : Cannot find name of file from array
     if (indexOfKey === -1) {
-      console.error(
+      throw new Error(
         `[S3CM.js] deleteByName : cannot find file that named ${key} from array`
       );
     }
