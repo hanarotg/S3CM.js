@@ -1,3 +1,6 @@
+
+<img src="https://user-images.githubusercontent.com/34812887/198477233-4b051766-f46d-425f-8136-58ba8c3a22e7.png" style="width: 64px; height:64px"/>
+
 # [S3CM.js]()
 
 S3 Client Manager - client-side AWS S3 javascript library
