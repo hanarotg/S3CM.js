@@ -3,16 +3,15 @@
 
 # [S3CM.js]()
 
-S3 Client Manager - client-side AWS S3 javascript library
+[AWS-SDK-V3](https://github.com/aws/aws-sdk-js-v3) based javascript Client Manager
 
 **DO NOT RECOMMEND TO USE IN PRODOCTION YET**
 
-## Features
+## Why do i have to use S3CM.js?
 
-- client-side oriented JS library
-- Promise-base functions
-- Order-Keeping Multiple file-upload
-- [AWS-SDK-V3](https://github.com/aws/aws-sdk-js-v3) Based
+- client-side oriented, No need to go through 3rd backend server
+- Promise-base functions with Order-Keeping Multiple file-upload
+- Easy to use
 
 ## Install
 
