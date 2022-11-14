@@ -149,12 +149,12 @@
 - _example_
 
   ```javascript
-  // if upload 2 files each names '010.jpeg', 'jot.png'
+  // if upload 2 files each names '010.jpeg', 'zoo.png'
   // when array = ['abc.png', 'yeeeeeeeee.svg']
   const arrUpdated = await s3cm.upload(files);
 
   console.log(arrUpdated);
-  // ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
+  // ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'zoo.png']
   ```
 
 - _param_
@@ -171,11 +171,11 @@
 
   ```javascript
   // if delete 'yeeeeeeeee.svg'
-  // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
+  // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'zoo.png']
   const arrUpdated = await s3cm.deleteByIndex(1);
 
   console.log(arrUpdated);
-  // ['abc.png', '010.jpeg', 'jot.png']
+  // ['abc.png', '010.jpeg', 'zoo.png']
   ```
 
 - _param_
@@ -192,11 +192,11 @@
 
   ```javascript
   // if delete 'yeeeeeeeee.svg'
-  // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'jot.png']
+  // when array = ['abc.png', 'yeeeeeeeee.svg', '010.jpeg', 'zoo.png']
   const arrUpdated = await s3cm.deleteByKey('yeeeeeeeee.svg');
 
   console.log(arrUpdated);
-  // ['abc.png', '010.jpeg', 'jot.png']
+  // ['abc.png', '010.jpeg', 'zoo.png']
   ```
 
 - _param_
